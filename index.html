@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Organiza tu juego de amigo secreto de forma fácil y divertida. Realiza sorteos aleatorios y encuentra ideas de regalos perfectas.">
+    <title>Amigo Secreto 2025 - Organiza tu intercambio de regalos</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpg" href="images/favicon.jpg">
+</head>
+<body>
+    <!-- Notificaciones -->
+    <div id="notification-container" aria-live="polite"></div>
+
+    <div class="container">
+        <!-- Encabezado con logo -->
+        <header class="site-header">
+            <div class="logo">
+                <img src="images/regalo.jpg" alt="Logo Amigo Secreto" width="60" height="30">
+            </div>
+            <nav class="main-nav" aria-label="Navegación principal">
+                <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul>
+                    <li><a href="#inicio" aria-current="page">Inicio</a></li>
+                    <li><a href="#participantes">Participantes</a></li>
+                    <li><a href="#reglas">Reglas</a></li>
+                    <li><a href="#sorteo">Sorteo</a></li>
+                    <li><a href="#ideas">Ideas de Regalo</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Sección principal -->
+        <main class="main-content">
+            <section id="inicio" class="hero-section">
+                <h1>¡Bienvenido al Amigo Secreto 2025!</h1>
+                <p class="subtitle">Únete a la diversión y comparte la magia de dar</p>
+                <div class="hero-actions">
+                    <a href="#participantes" class="cta-button">Participar Ahora</a>
+                    <button class="secondary-button" onclick="mostrarTutorial()">Ver Tutorial</button>
+                </div>
+            </section>
+
+            <section id="participantes" class="participants-section">
+                <h2>Participantes</h2>
+                <div class="section-intro">
+                    <p>Agrega los nombres de todos los participantes para el sorteo.</p>
+                    <p class="min-participants">Mínimo 3 participantes requeridos</p>
+                </div>
+                
+                <!-- Formulario para agregar participantes -->
+                <form id="formParticipante" class="input-wrapper">
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="amigo" 
+                            class="input-name" 
+                            placeholder="Ingresa el nombre del participante" 
+                            required
+                            pattern="[A-Za-zÀ-ÿ\s]{2,50}"
+                            title="El nombre debe contener solo letras y espacios, entre 2 y 50 caracteres"
+                        >
+                        <button type="submit" class="button-add">
+                            <span class="button-icon">+</span>
+                            <span class="button-text">Agregar</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Lista de participantes -->
+                <div class="participants-container">
+                    <h3>Lista de participantes (<span id="participantCount">0</span>)</h3>
+                    <ul id="listaAmigos" class="participants-grid" aria-live="polite"></ul>
+                </div>
+            </section>
+
+            <section id="reglas" class="rules-section">
+                <h2>Reglas del Juego</h2>
+                <div class="rules-container">
+                    <div class="rule-item" data-aos="fade-up">
+                        <span class="rule-number">1</span>
+                        <div class="rule-content">
+                            <h3>Presupuesto</h3>
+                            <p>Límite de presupuesto: $30</p>
+                            <small>Respeta el límite para mantener la equidad</small>
+                        </div>
+                    </div>
+                    <div class="rule-item" data-aos="fade-up" data-aos-delay="100">
+                        <span class="rule-number">2</span>
+                        <div class="rule-content">
+                            <h3>Fecha de Entrega</h3>
+                            <p>Fecha límite: 24 de diciembre</p>
+                            <small>No olvides entregar tu regalo a tiempo</small>
+                        </div>
+                    </div>
+                    <div class="rule-item" data-aos="fade-up" data-aos-delay="200">
+                        <span class="rule-number">3</span>
+                        <div class="rule-content">
+                            <h3>Secreto</h3>
+                            <p>Mantén en secreto la identidad de tu amigo asignado</p>
+                            <small>¡La sorpresa es parte de la diversión!</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="sorteo" class="draw-section">
+                <h2>Realizar Sorteo</h2>
+                <div class="draw-container">
+                    <div class="draw-info">
+                        <p>Una vez realizado el sorteo, cada participante recibirá el nombre de su amigo secreto.</p>
+                    </div>
+                    <button 
+                        onclick="realizarSorteo()" 
+                        class="draw-button" 
+                        id="botonSorteo"
+                        disabled
+                        aria-label="Iniciar sorteo de amigo secreto"
+                    >
+                        <span class="button-icon">🎲</span>
+                        <span class="button-text">Iniciar Sorteo</span>
+                    </button>
+                    <div id="resultado" class="result-box" aria-live="polite">
+                        <div class="result-placeholder">
+                            <p>Los resultados del sorteo aparecerán aquí...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ideas" class="gift-ideas-section">
+                <h2>Ideas de Regalo</h2>
+                <div class="ideas-grid">
+                    <article class="idea-card" data-aos="fade-up">
+                        <div class="card-image">
+                            <img src="images/regalo.jpg" alt="Regalo personalizado" class="gift-image" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3>Regalos Personalizados</h3>
+                            <p>Ideas creativas y únicas para sorprender a tu amigo secreto</p>
+                            <ul class="gift-suggestions">
+                                <li>Tazas personalizadas</li>
+                                <li>Álbumes de fotos</li>
+                                <li>Accesorios grabados</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="idea-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-image">
+                            <img src="images/participante.jpg" alt="Experiencias memorables" class="participant-image" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3>Experiencias Memorables</h3>
+                            <p>Regala momentos inolvidables que crearán recuerdos especiales</p>
+                            <ul class="gift-suggestions">
+                                <li>Entradas para eventos</li>
+                                <li>Clases de hobby</li>
+                                <li>Experiencias gastronómicas</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="idea-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-image">
+                            <img src="images/regalo.jpg" alt="Detalles especiales" class="gift-image" loading="lazy">
+                        </div>
+                        <div class="card-content">
+                            <h3>Detalles Especiales</h3>
+                            <p>Pequeños gestos con gran significado que alegrarán el día</p>
+                            <ul class="gift-suggestions">
+                                <li>Sets de autocuidado</li>
+                                <li>Libros y material creativo</li>
+                                <li>Accesorios tecnológicos</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
+
+        <!-- Pie de página -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <address>
+                        <p>Email: <a href="mailto:info@amigosecreto.com">info@amigosecreto.com</a></p>
+                        <p>Teléfono: <a href="tel:+1234567890">123-456-7890</a></p>
+                    </address>
+                </div>
+                <div class="footer-section">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Síguenos en Facebook">
+                            <span class="social-icon">📱</span> Facebook
+                        </a>
+                        <a href="#" class="social-link" aria-label="Síguenos en Instagram">
+                            <span class="social-icon">📷</span> Instagram
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <nav class="footer-nav">
+                        <ul>
+                            <li><a href="#inicio">Inicio</a></li>
+                            <li><a href="#participantes">Participantes</a></li>
+                            <li><a href="#reglas">Reglas</a></li>
+                            <li><a href="#sorteo">Sorteo</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Amigo Secreto. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal Tutorial -->
+    <div id="tutorialModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Cerrar tutorial">&times;</button>
+            <h2>Cómo Funciona</h2>
+            <ol class="tutorial-steps">
+                <li>Agrega los nombres de todos los participantes</li>
+                <li>Asegúrate de tener al menos 3 participantes</li>
+                <li>Haz clic en "Iniciar Sorteo"</li>
+                <li>¡Revisa los resultados y mantén el secreto!</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
