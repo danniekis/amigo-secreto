@@ -54,4 +54,4 @@ Si deseas contribuir a este proyecto, por favor sigue estos pasos:
 4. Haz push a tu rama (`git push origin feature/nueva-funcionalidad`).
 5. Crea un Pull Request para que los cambios sean revisados y fusionados.
 
-
+![logo](C:\Users\M513UA-L1304W\Desktop\phyton\desafio amigo secreto\imagenes)
